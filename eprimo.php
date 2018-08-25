@@ -51,7 +51,7 @@
       }
       else
       {
-        return $numero.' NÃO é primo do lucas';
+        return $numero.' NÃO é primo';
       }
 
     }
