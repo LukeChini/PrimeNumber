@@ -86,7 +86,7 @@
       {
         return 'Invalid number, please enter an integer greater than 1';
       }
-      elseif($mult_array!==0 || $number==2)
+      elseif($mult_array!=0 || $number==2)
       {
         return arrumarNumero($number)." It's a PRIME Number";
       }
