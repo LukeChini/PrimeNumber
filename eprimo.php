@@ -2,91 +2,127 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Primo</title>
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>PrimeNumber</title>
   </head>
   <body>
 
     <form action="eprimo.php" method="post">
 
-      <p> Insira um Numero e descubra se ele é PRIMO e quais PRIMOS estão entre o numero inicial e ele: </p>
-      numero inicial: <input type="number" name="numeroi" value='2'></input>
-      numero final/quero saber se é primo<input type="number" name="numero"></input>
-      <input type="submit" name="enviar" value="Descobrir">
+      <p class='title1'>PRIME NUMBER</p>
 
+      <div class='solution'> Enter a Number and find out if it is PRIME NUMBER and which PRIME NUMBER's are between the initial number and it:
+      <br /><br />
+
+      <div class='form_search'>
+      <table>
+      <tr>
+      <td>Initial number:</td>
+      <td><input type="number" name="number_first" value='2' min='0' max='15000'></input></td>
+      </tr>
+      <tr>
+      <td>Final number:</td>
+      <td><input type="number" name="number_last" min='1' max='15000'></input> <input type="submit" name="send" value="FIND"></td>
+      </tr>
+    </table>
+
+
+      </div>
     </form>
+  </div>
+
 
 
     <?php
 
-    $descobrir = $_POST['numero'];
-    $minimo = $_POST['numeroi'];
+    function arrumarNumero($number)
+    {
+      $n = strlen($number);
+
+      if ($n < 4 )
+      {
+        echo $number;
+      }
+
+      if ($n == 4 || $n > 4 )
+      {
+        $n1 = substr($number, 0,($n - 3));
+        $nlast = substr($number, ($n - 3),($n - 1));
+
+        echo "<span class='number'>".$n1.'.'.$nlast."</span>";
+      }
+    }
+
+
+    $number_first = $_POST['number_first'];
+    $number_last = $_POST['number_last'];
 
 
 
-    function ePrimo($numero)
+    function itsPrime($number)
     {
       $array = [];
-      for($n=2; $n<$numero; $n++)
+      for($n=2; $n<$number; $n++)
       {
-        $rest=($numero%$n);
+        $rest=($number%$n);
         array_push($array, $rest);
       }
 
       $count = count($array);
-      $produto = 1;
+      $mult_array = 1;
 
       for($i=0;$i<$count;$i++)
       {
-        $produto = $array[$i] * $produto;
+        $mult_array = $array[$i] * $mult_array;
       }
 
 
-      if($numero < 1 || $numero == 1 )
+      if($number < 1 || $number == 1 )
       {
-        return 'Numero não valido, favor insira um numero inteiro maior que 1';
+        return 'Invalid number, please enter an integer greater than 1';
       }
-      elseif($produto!==0 || $numero==2)
+      elseif($mult_array!==0 || $number==2)
       {
-        return $numero.' é PRIMO';
+        return arrumarNumero($number)." It's a PRIME Number";
       }
       else
       {
-        return $numero.' NÃO é primo';
+        return arrumarNumero($number)." It's <span class='not'> NOT </span> prime number" ;
       }
 
     }
 
-echo '<hr />';
-echo 'Minimo = '.$minimo.' Maximo = '.$descobrir;
-echo '<hr />';
-
-    echo ePrimo($descobrir);
 
 
 
-    function ePrimo01($numero)
+    function itsPrime01($number)
     {
       $array = [];
-      for($n=2; $n<$numero; $n++)
+      for($n=2; $n<$number; $n++)
       {
-        $rest=($numero%$n);
+        $rest=($number%$n);
         array_push($array, $rest);
       }
 
       $count = count($array);
-      $produto = 1;
+      $mult_array = 1;
 
       for($i=0;$i<$count;$i++)
       {
-        $produto = $array[$i] * $produto;
+        $mult_array = $array[$i] * $mult_array;
       }
 
 
-      if($numero < 1 || $numero == 1)
+      if($number < 1 || $number == 1)
       {
         return 0;
       }
-      elseif($produto!==0 || $numero==2)
+      elseif($mult_array!==0 || $number==2)
       {
         return 1;
       }
@@ -97,16 +133,15 @@ echo '<hr />';
 
     }
 
-    $descobrir = $_POST['numero'];
 
-    function printarPrimoAte($numeroMax, $numeroMin)
+    function printarPrimoAte($numberMin, $numberMax)
     {
       $array = [];
-      for ($n=$numeroMin;$n<=$numeroMax;$n++)
+      for ($n=$numberMin;$n<=$numberMax;$n++)
       {
-        if(ePrimo01($n) === 1)
+        if(itsPrime01($n) === 1)
         {
-          echo $n.' - ';
+          echo "<div class='printar'>".$n."</div>";
         }
         else
         {
@@ -115,30 +150,43 @@ echo '<hr />';
       }
     }
 
+echo '<hr />';
+echo "<div class=container_result>";
+echo "<div class='result'>";
+echo "Min = <span class='number'>".$number_first."</span>"." Max = <span class='number'>".$number_last."</span>";
+echo "</div>";
+
+echo "<div class='result'>";
+echo itsPrime($number_last);
+echo "</div>";
+
+echo "<div class='result'>";
+echo countPrimosAte($number_first,$number_last);
+echo '</div>';
+
+echo "</div>";
+
+echo '<hr />';
+
+ echo "<div class='table_prime'>";
+ echo printarPrimoAte($number_first,$number_last);
+ echo '</div>';
+
+ echo '<hr />';
 
 
-    echo '<hr />';
-
-echo countPrimosAte($descobrir, $minimo);
-    echo '<hr />';
-
- echo printarPrimoAte($descobrir, $minimo);
-
-
- $descobrir = $_POST['numero'];
-
- function countPrimosAte($numeroMax, $numeroMin)
+ function countPrimosAte($numberMin, $numberMax)
  {
    $array = [];
-   for ($n=$numeroMin;$n<=$numeroMax;$n++)
+   for ($n=$numberMin;$n<=$numberMax;$n++)
    {
-     if(ePrimo01($n) === 1)
+     if(itsPrime01($n) === 1)
      {
        array_push($array, $n);
      }
-     if ($n==$numeroMax)
+     if ($n==$numberMax)
      {
-       echo 'Entre '.$numeroMin.' e '.$numeroMax.' existem '.count($array).' numeros primos';
+       echo "Between <span class='number'>".$numberMin."</span> and <span class='number'>".$numberMax."</span> exist <span class='number'>".count($array)."</span> prime numbers";
      }
      else
      {
