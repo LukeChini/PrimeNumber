@@ -1,0 +1,86 @@
+
+  .title1
+  {
+      font-size: 41px;
+      text-align: center;
+      padding: 19px;
+      color: rgb(250,250,250);
+      display: block;
+      background: rgb(82,82,82);
+  }
+
+  .solution
+  {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 21px;
+    color: rgb(100,100,100);
+  }
+
+  .solution input
+  {
+    width: 80px;
+    text-align: center;
+  }
+
+  .printar
+  {
+    width: 25px;
+    display: inline-block;
+    border-style: solid;
+    border-color: rgb(82,82,82);
+    border-width: 1px;
+    text-align: center;
+    padding: 15px;
+
+  }
+
+  .number{
+    font-size: 20px;
+    color: red;
+
+  }
+
+  .not
+  {
+    font-size: 20px;
+    color: red;
+  }
+
+  .result
+  {
+    width: 30%;
+    border-style: solid;
+    border-color: rgb(82,82,82);
+    border-width: 1px;
+    text-align: center;
+    margin: 1%;
+    display: inline-block;
+
+  }
+
+  .table_prime
+  {
+    margin: 10px;
+  }
+
+  .container_result
+  {
+    width: 100%;
+    margin: 10px;
+  }
+
+  .form_search
+  {
+    margin: 10px;
+  }
+
+
+  .form_search input[type="submit"]
+{
+    width: 100px;
+    margin-left: 40px;
+    background-color: rgb(0,120,215);
+    color: white;
+    font-size: 20px;
+}

@@ -23,11 +23,11 @@
       <table>
       <tr>
       <td>Initial number:</td>
-      <td><input type="number" name="number_first" value='2' min='0' max='15000'></input></td>
+      <td><input type="number" name="number_first" value='2' min='0' max='30000'></input></td>
       </tr>
       <tr>
       <td>Final number:</td>
-      <td><input type="number" name="number_last" min='1' max='15000'></input> <input type="submit" name="send" value="FIND"></td>
+      <td><input type="number" name="number_last" min='1' max='30000'></input> <input type="submit" name="send" value="FIND"></td>
       </tr>
     </table>
 
@@ -64,38 +64,7 @@
 
 
 
-    function itsPrime($number)
-    {
-      $array = [];
-      for($n=2; $n<$number; $n++)
-      {
-        $rest=($number%$n);
-        array_push($array, $rest);
-      }
 
-      $count = count($array);
-      $mult_array = 1;
-
-      for($i=0;$i<$count;$i++)
-      {
-        $mult_array = $array[$i] * $mult_array;
-      }
-
-
-      if($number < 1 || $number == 1 )
-      {
-        return 'Invalid number, please enter an integer greater than 1';
-      }
-      elseif($mult_array!=0 || $number==2)
-      {
-        return arrumarNumero($number)." It's a PRIME Number";
-      }
-      else
-      {
-        return arrumarNumero($number)." It's <span class='not'> NOT </span> prime number" ;
-      }
-
-    }
 
 
 
@@ -106,6 +75,11 @@
       for($n=2; $n<$number; $n++)
       {
         $rest=($number%$n);
+        if($rest == 0)
+        {
+          array_push($array,$rest);
+          break;
+        }
         array_push($array, $rest);
       }
 
@@ -122,13 +96,31 @@
       {
         return 0;
       }
-      elseif($mult_array!==0 || $number==2)
+      elseif($mult_array!=0 || $number==2)
       {
         return 1;
       }
       else
       {
         return 0;
+      }
+
+    }
+
+    function itsPrime($number)
+    {
+
+      if($number < 1 || $number == 1 )
+      {
+        return 'Invalid number, please enter an integer greater than 1';
+      }
+      elseif(itsPrime01($number)==1)
+      {
+        return $number." It's a PRIME Number";
+      }
+      else
+      {
+        return $number." It's <span class='not'> NOT </span> prime number" ;
       }
 
     }
